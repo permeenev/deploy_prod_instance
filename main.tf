@@ -1,25 +1,25 @@
-# Jenkins instance describe
-data "vkcs_compute_flavor" "jenkins_flavor" {
-  name = var.jenkins_flavor
+# prod instance describe
+data "vkcs_compute_flavor" "prod_flavor" {
+  name = var.prod_flavor
 }
 
-data "vkcs_images_image" "jenkins_image" {
-  name = var.jenkins_image_flavor
+data "vkcs_images_image" "prod_image" {
+  name = var.prod_image_flavor
 }
 
-resource "vkcs_compute_instance" "jenkins_instance" {
-  name                    = "jenkins_instance"
-  flavor_id               = data.vkcs_compute_flavor.jenkins_flavor.id
+resource "vkcs_compute_instance" "prod_instance" {
+  name                    = "prod_instance"
+  flavor_id               = data.vkcs_compute_flavor.prod_flavor.id
   key_pair                = var.key_pair_name
   security_groups         = ["default","ssh"]
   availability_zone       = var.availability_zone_name
   # Use block_device to specify instance disk to get full control of it in the futur
   block_device {
-    uuid                  = data.vkcs_images_image.jenkins_image.id
+    uuid                  = data.vkcs_images_image.prod_image.id
     source_type           = "image"
     destination_type      = "volume"
     volume_type           = "ceph-ssd"
-    volume_size           = 20
+    volume_size           = 15
     boot_index            = 0
     delete_on_termination = true
   }
@@ -68,17 +68,17 @@ resource "vkcs_compute_instance" "deploy_instance" {
   ]
 }
 
-resource "vkcs_networking_floatingip" "jenkins_fip" {
+resource "vkcs_networking_floatingip" "prod_fip" {
   pool = data.vkcs_networking_network.extnet.name
 }
 
-resource "vkcs_compute_floatingip_associate" "jenkins_fip" {
-  floating_ip = vkcs_networking_floatingip.jenkins_fip.address
-  instance_id = vkcs_compute_instance.jenkins_instance.id
+resource "vkcs_compute_floatingip_associate" "prod_fip" {
+  floating_ip = vkcs_networking_floatingip.prod_fip.address
+  instance_id = vkcs_compute_instance.prod_instance.id
 }
 
-output "jenkins_fip" {
-  value = vkcs_networking_floatingip.jenkins_fip.address
+output "prod_fip" {
+  value = vkcs_networking_floatingip.prod_fip.address
 }
 
 resource "vkcs_networking_floatingip" "deploy_fip" {
