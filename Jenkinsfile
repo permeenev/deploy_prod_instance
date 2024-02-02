@@ -9,9 +9,9 @@ pipeline {
                 withCredentials([file(
                     credentialsId: 'd2cfaab2-c8e8-49fa-bb7e-ee8542e19d69', 
                     variable: 'vkcs_provider')]){
-                        sh "if ! [ -e 'vkcs_provider.tf' ] ; then
+                        sh """if ! [ -e 'vkcs_provider.tf' ] ; then
                                 cp '$vkcs_provider' vkcs_provider.tf 
-                            fi"
+                            fi"""
                     }
                 script {
                     properties([
