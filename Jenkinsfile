@@ -17,14 +17,14 @@ pipeline {
                     properties([
                         parameters([
                             choice(
-                                choices: [ 'plan', 'apply', 'destroy'], 
-                                name: 'terr_mod' )
+                                choices: [ 'plan', 'apply -auto-approve', 'destroy -auto-approve'], 
+                                name: 'terraform_do' )
                                 ])
                             ])
                     sh "ls -la"
                     sh "terraform --version"
                     sh "terraform init"
-                    sh "terraform $terr_mod -auto-approve"
+                    sh "terraform $terraform_do "
                 }
             }
 
