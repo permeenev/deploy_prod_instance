@@ -11,7 +11,7 @@ pipeline {
                 sh "ls -la"
                 sh "terraform --version"
                 sh "terraform init"
-                sh "terraform apply"
+                sh "terraform apply -auto-approve"
             }
 
         }
