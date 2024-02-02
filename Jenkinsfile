@@ -1,12 +1,17 @@
 pipeline {
-    agent {
-        docker { image 'node:20.11.0-alpine3.19' }
-    }
+    agent any
     stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
+        stage('test') {
+            tools{
+                terraform
             }
+            steps {
+                // Get some code from a GitHub repository
+                sh " git clone 'https://github.com/permeenev/deploy_prod_instance.git'"
+                sh "ls -la"
+                sh "terraform --version"
+            }
+
         }
     }
 }
