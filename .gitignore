@@ -1,2 +1,3 @@
 vkcs_provider.tf
-.terraform/*
+.terraform*
+terraform.tfstate
