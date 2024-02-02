@@ -9,7 +9,7 @@ pipeline {
                 withCredentials([file(
                     credentialsId: 'd2cfaab2-c8e8-49fa-bb7e-ee8542e19d69', 
                     variable: 'vkcs_provider')]){
-                        sh "cp "$vkcs_provider" vkcs_provider"
+                        sh "cp '$vkcs_provider' vkcs_provider"
                     }
                 script {
                     sh "ls -la"
