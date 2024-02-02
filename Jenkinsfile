@@ -1,10 +1,11 @@
 pipeline {
     agent any
+    tools{
+        terraform "1.7.1"
+    }
     stages {
         stage('test') {
-            tools{
-                terraform
-            }
+
             steps {
                 // Get some code from a GitHub repository
                 sh " git clone 'https://github.com/permeenev/deploy_prod_instance.git'"
