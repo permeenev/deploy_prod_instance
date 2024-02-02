@@ -22,7 +22,6 @@ pipeline {
                                 ])
                             ])
                     sh "ls -la"
-                    sh "terraform --version"
                     sh "terraform init"
                     sh "terraform $terraform_do "
                 }
