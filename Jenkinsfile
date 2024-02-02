@@ -8,6 +8,7 @@ pipeline {
 
             steps {
                 // Get some code from a GitHub repository
+                sh "pwd"
                 sh "ls -la"
                 sh "terraform --version"
             }
