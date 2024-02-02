@@ -10,7 +10,7 @@ pipeline {
                 // Get some code from a GitHub repository
                 sh "ls -la"
                 sh "terraform --version"
-                sh "terraform providers lock -platform=windows_amd64"
+                sh "terraform providers lock -platform=linux_amd64"
                 sh "terraform init"
                 sh "terraform plan"
             }
