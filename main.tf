@@ -11,7 +11,7 @@ resource "vkcs_compute_instance" "prod_instance" {
   name                    = "prod_instance"
   flavor_id               = data.vkcs_compute_flavor.prod_flavor.id
   key_pair                = var.key_pair_name
-  security_groups         = ["default","ssh"]
+  security_groups         = ["default","ssh","all_access"]
   availability_zone       = var.availability_zone_name
   # Use block_device to specify instance disk to get full control of it in the futur
   block_device {
@@ -46,7 +46,7 @@ resource "vkcs_compute_instance" "deploy_instance" {
   name                    = "deploy_instance"
   flavor_id               = data.vkcs_compute_flavor.deploy_flavor.id
   key_pair                = var.key_pair_name
-  security_groups         = ["default","ssh"]
+  security_groups         = ["default","ssh","all_access"]
   availability_zone       = var.availability_zone_name
 
   block_device {

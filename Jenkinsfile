@@ -12,11 +12,17 @@ pipeline {
                         sh "cp '$vkcs_provider' vkcs_provider.tf"
                     }
                 script {
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['apply', 'destroy', 'plan'], 
+                                name: 'terr_mod' )
+                                ])
+                            ])
                     sh "ls -la"
                     sh "terraform --version"
                     sh "terraform init"
-                    sh "terraform apply -auto-approve"
-                    sh 'terraform state list'
+                    sh "terraform $terr_mod -auto-approve"
                 }
             }
 
