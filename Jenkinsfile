@@ -7,7 +7,7 @@ pipeline {
         stage('test') {
             steps {
                 withCredentials([file(
-                    credentialsId: 'd2cfaab2-c8e8-49fa-bb7e-ee8542e19d69', 
+                    credentialsId: '12755954-d6b3-46af-9a98-2bc94d8a2a42', 
                     variable: 'vkcs_provider')]){
                         sh """if ! [ -e 'vkcs_provider.tf' ] ; then
                                 cp '$vkcs_provider' vkcs_provider.tf 
