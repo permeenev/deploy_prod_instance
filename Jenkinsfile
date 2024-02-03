@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        terraform "terraform1.7.1"
+        terraform "terraform1.7.2"
     }
     stages {
         stage('test') {
@@ -21,7 +21,6 @@ pipeline {
                                 name: 'terraform_do' )
                                 ])
                             ])
-                    sh "ls -la"
                     sh "terraform init"
                     sh "terraform $terraform_do "
                 }
